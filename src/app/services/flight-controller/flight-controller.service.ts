@@ -8,7 +8,7 @@ import { AppSettings } from '../../settings/app.settings';
 })
 export class FlightControllerService {
 
-    private host = AppSettings.APP_URL + "flight_modules";
+    private host = AppSettings.APP_URL + "flight_controllers";
 
   constructor(private http:HttpClient) { }
 

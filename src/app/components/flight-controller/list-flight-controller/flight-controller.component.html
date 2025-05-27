@@ -1,0 +1,48 @@
+<div class="container mt-4">
+  <h2 class="mb-4 text-center">Liste des Flight Controllers</h2>
+
+  <div *ngIf="flightControllers?.length > 0; else noControllers">
+    <div class="row">
+      <div *ngFor="let controller of flightControllers" class="col-12 col-md-6 col-lg-4 mb-4">
+        <div class="card h-100">
+          <div class="card-header bg-primary text-white">
+            <strong>Flight Controller ID:</strong> {{ controller.idFlightController }}
+          </div>
+            <div class="mt-2 text-center">
+              <button class="btn btn-success" (click)="choisirController(controller.idFlightController)">Choisir</button>
+            </div>
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Drone(s) Associé(s)</h5>
+
+            <div *ngIf="controller.gpsModules?.length > 0; else noModules">
+              <div class="d-flex flex-wrap gap-3">
+                <div *ngFor="let gps of controller.gpsModules" class="border p-3 rounded bg-light" style="min-width: 250px; flex: 1 1 auto;">
+                  <p><strong>ID Drone:</strong> {{ gps.idDrone }}</p>
+                  <p><strong>Modèle:</strong> {{ gps.modele }}</p>
+                  <p><strong>Poids:</strong> {{ gps.poids }} g</p>
+                  <p><strong>Portée max:</strong> {{ gps.porteeMax }} m</p>
+                  <p><strong>Capacité batterie:</strong> {{ gps.capaciteBatterie }} mAh</p>
+                  <p><strong>Dimensions (L x l x h):</strong> {{ gps.longueur }} x {{ gps.largeur }} x {{ gps.hauteur }} cm</p>
+                  <p><strong>Caméra:</strong> {{ gps.camera ? 'Oui' : 'Non' }} </p>
+                  <p><strong>Position GPS:</strong></p>
+                  <ul>
+                    <li><strong>Latitude:</strong> {{ gps.latitude }}</li>
+                    <li><strong>Longitude:</strong> {{ gps.longitude }}</li>
+                    <li><strong>Altitude:</strong> {{ gps.altitude }} m</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <ng-template #noModules>
+              <p class="text-muted">Aucun module GPS associé.</p>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noControllers>
+    <p class="text-danger">Aucun Flight Controller disponible.</p>
+  </ng-template>
+</div>
